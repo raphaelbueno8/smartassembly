@@ -7,14 +7,20 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useState } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import InputMask from "react-input-mask";
 
-type FormValues = {
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
-};
+
+const FormValuesSchema = z.object({
+  name: z.string().min(1, "Nome é obrigatório"),
+  email: z.string().email("Email inválido"),
+  phone: z.string().regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, "Telefone inválido"),
+  subject: z.string().min(1, "Assunto é obrigatório"),
+  message: z.string().min(1, "Mensagem é obrigatória"),
+});
+
+type FormValues = z.infer<typeof FormValuesSchema>;
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,23 +30,24 @@ export function ContactSection() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    resolver: zodResolver(FormValuesSchema),
+  });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    console.log("Form submitted:", data);
-    
     toast({
       title: "Mensagem enviada",
       description: "Agradecemos pelo seu contato. Retornaremos em breve!",
       duration: 5000,
     });
-    
-    reset();
+    reset({
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    });
     setIsSubmitting(false);
   };
 
@@ -53,7 +60,7 @@ export function ContactSection() {
           <p className="mb-8 text-white/80">
             Estamos prontos para atender às suas necessidades. Entre em contato conosco para saber mais sobre nossos serviços e como podemos ajudar sua empresa a crescer.
           </p>
-          
+
           <div className="space-y-5">
             <div className="flex items-start">
               <MapPin className="w-6 h-6 mr-4 text-white flex-shrink-0" />
@@ -62,7 +69,7 @@ export function ContactSection() {
                 <p className="text-white/80">Rua Exemplo, 123, Centro<br />Rio de Janeiro, RJ</p>
               </div>
             </div>
-            
+
             <div className="flex items-start">
               <Phone className="w-6 h-6 mr-4 text-white flex-shrink-0" />
               <div>
@@ -70,7 +77,7 @@ export function ContactSection() {
                 <p className="text-white/80">(11) 2222-3333</p>
               </div>
             </div>
-            
+
             <div className="flex items-start">
               <Mail className="w-6 h-6 mr-4 text-white flex-shrink-0" />
               <div>
@@ -79,7 +86,7 @@ export function ContactSection() {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-8">
             <h4 className="font-bold mb-4">Siga-nos</h4>
             <div className="flex space-x-4">
@@ -105,61 +112,69 @@ export function ContactSection() {
         <div className="animate-on-scroll">
           <div className="bg-white rounded-lg p-8">
             <h3 className="text-2xl font-bold text-company-blue mb-6">Envie uma Mensagem</h3>
-            
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div>
                 <Input
                   placeholder="Nome"
-                  {...register("name", { required: "Nome é obrigatório" })}
-                  className={errors.name ? "border-red-500" : ""}
+                  maxLength={100}
+                  {...register("name")}
+                  className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
                 />
                 {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
               </div>
-              
+
               <div>
                 <Input
                   type="email"
                   placeholder="Email"
-                  {...register("email", { 
-                    required: "Email é obrigatório",
-                    pattern: { 
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 
-                      message: "Email inválido" 
-                    }
-                  })}
-                  className={errors.email ? "border-red-500" : ""}
+                  maxLength={100}
+                  {...register("email")}
+                  className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
                 />
                 {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
               </div>
-              
+
               <div>
-                <Input
-                  placeholder="Telefone"
+                <InputMask
+                  mask="(99) 99999-9999"
                   {...register("phone")}
-                />
+                >
+                  {(inputProps: any) => (
+                    <Input
+                      {...inputProps}
+                      type="tel"
+                      placeholder="(11) 93255-9768"
+                      className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
+                    />
+                  )}
+                </InputMask>
+                {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>}
               </div>
-              
+
               <div>
                 <Input
                   placeholder="Assunto"
-                  {...register("subject", { required: "Assunto é obrigatório" })}
-                  className={errors.subject ? "border-red-500" : ""}
+                  maxLength={50}
+                  {...register("subject")}
+                  className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
                 />
                 {errors.subject && <p className="mt-1 text-sm text-red-500">{errors.subject.message}</p>}
               </div>
-              
+
               <div>
                 <Textarea
                   placeholder="Mensagem"
                   rows={5}
-                  {...register("message", { required: "Mensagem é obrigatória" })}
-                  className={errors.message ? "border-red-500" : ""}
+                  maxLength={500}
+                  {...register("message")}
+                  className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
                 />
                 {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>}
               </div>
-              
-              <Button 
-                type="submit" 
+
+              <Button
+                type="submit"
                 className="w-full bg-company-blue hover:bg-company-darkBlue"
                 disabled={isSubmitting}
               >

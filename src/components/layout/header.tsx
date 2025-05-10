@@ -52,9 +52,11 @@ export function Header() {
                 {link.name}
               </a>
             ))}
-            <Button className="bg-company-blue hover:bg-company-darkBlue">
-              Fale Conosco
-            </Button>
+            <a href="#contact">
+              <Button className="bg-company-blue hover:bg-company-darkBlue">
+                Fale Conosco
+              </Button>
+            </a>
           </nav>
 
           {/* Mobile Navigation */}
@@ -88,6 +90,6 @@ export function Header() {
           </nav>
         )}
       </div>
-    </header>
+    </header >
   );
 }
