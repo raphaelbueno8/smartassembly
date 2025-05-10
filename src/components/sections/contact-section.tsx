@@ -10,7 +10,11 @@ import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputMask from "react-input-mask";
+import emailjs from "@emailjs/browser";
 
+const serviceId = "service_w6llmdz";
+const templateId = "template_g7r8xj6";
+const publicKey = "mq5Sc5a-UDicNwJ9G";
 
 const FormValuesSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
@@ -35,19 +39,42 @@ export function ContactSection() {
   });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+
     setIsSubmitting(true);
-    toast({
-      title: "Mensagem enviada",
-      description: "Agradecemos pelo seu contato. Retornaremos em breve!",
-      duration: 5000,
-    });
-    reset({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
+
+    const params = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      subject: data.subject,
+      message: data.message,
+    }
+
+    await emailjs.send(serviceId, templateId, params, publicKey)
+      .then((response) => {
+        toast({
+          title: "Mensagem enviada",
+          description: "Agradecemos pelo seu contato. Retornaremos em breve!",
+          duration: 5000,
+        });
+        reset({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+        console.log(response.status, response.text);
+      }, (error) => {
+        toast({
+          title: "Erro ao enviar mensagem",
+          description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde.",
+          variant: "destructive",
+          duration: 5000
+        });
+        console.log(error.text);
+      });
+
     setIsSubmitting(false);
   };
 
@@ -144,7 +171,7 @@ export function ContactSection() {
                     <Input
                       {...inputProps}
                       type="tel"
-                      placeholder="(11) 93255-9768"
+                      placeholder="(99) 99999-9999"
                       className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
                     />
                   )}
