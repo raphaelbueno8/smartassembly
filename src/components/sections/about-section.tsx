@@ -16,7 +16,7 @@ export function AboutSection() {
           </p>
         </div>
         <div className="animate-on-scroll">
-          <div className="grid grid-cols-2 gap-4">
+          {/* <div className="grid grid-cols-2 gap-4">
             <div className="bg-company-gray p-6 rounded-lg text-center">
               <h4 className="text-3xl font-bold text-company-blue">10+</h4>
               <p className="text-gray-700">Anos de experiência</p>
@@ -33,7 +33,8 @@ export function AboutSection() {
               <h4 className="text-3xl font-bold text-company-blue">98%</h4>
               <p className="text-gray-700">Clientes satisfeitos</p>
             </div>
-          </div>
+          </div> */}
+          <img src="/Robo-Industrial-Azul.png" alt="Sobre a Smart Assembly" className="w-full h-auto rounded-lg mt-6 md:mt-0 transform scale-x-[-1]" />
         </div>
       </div>
     </Section>
