@@ -101,7 +101,7 @@ export function ContactSection() {
               <Phone className="w-6 h-6 mr-4 text-white flex-shrink-0" />
               <div>
                 <h4 className="font-bold mb-1">Telefone</h4>
-                <p className="text-white/80">(11) 2222-3333</p>
+                <p className="text-white/80"> (19) 99710-1806</p>
               </div>
             </div>
 
