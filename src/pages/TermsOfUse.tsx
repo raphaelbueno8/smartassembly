@@ -10,8 +10,7 @@ const TermsOfUse = () => {
       <main className="pt-24 pb-12">
         <Section background="white" className="py-12">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-company-darkBlue">Termos de Uso</h1>
-            
+            <h1 className="text-3xl md:text-4xl font-bold mb-8 text-company-darkBlue">Termos de Uso</h1>           
             <div className="space-y-8">
               <div className="space-y-4">
                 <p className="text-gray-700">

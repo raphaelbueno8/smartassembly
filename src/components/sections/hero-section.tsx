@@ -7,9 +7,6 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="container mx-auto px-4 md:px-8 z-10">
         <div className="max-w-3xl mx-auto text-center">
-          {/* <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
-            Soluções Tecnológicas para Seu Negócio
-          </h1> */}
           <img src="/Logo-03-Branco.png" alt="Logo" className="mx-auto mb-8 animate-fade-in" />
           <p className="text-xl md:text-2xl mb-8 animate-fade-in">
           Transformando máquinas em soluções inteligentes.

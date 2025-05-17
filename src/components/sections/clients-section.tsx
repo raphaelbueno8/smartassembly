@@ -28,7 +28,7 @@ export function ClientsSection() {
                     <div className="text-gray-500 font-semibold">
                       <img src={`cliente-logo-${logo}.png`}
                         alt={`Logo ${logo}`}
-                        className="h-16 w-auto" /></div>
+                        className="h-32 w-auto" /></div>
                   </div>
                 </div>
               </CarouselItem>

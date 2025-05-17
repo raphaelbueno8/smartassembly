@@ -15,27 +15,8 @@ export function AboutSection() {
             Com uma equipe de profissionais altamente qualificados e experientes, garantimos que cada projeto seja desenvolvido com o máximo de excelência, utilizando as mais modernas tecnologias disponíveis no mercado.
           </p>
         </div>
-        {/* <div className="animate-on-scroll">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-company-gray p-6 rounded-lg text-center">
-              <h4 className="text-3xl font-bold text-company-blue">10+</h4>
-              <p className="text-gray-700">Anos de experiência</p>
-            </div>
-            <div className="bg-company-gray p-6 rounded-lg text-center">
-              <h4 className="text-3xl font-bold text-company-blue">200+</h4>
-              <p className="text-gray-700">Projetos concluídos</p>
-            </div>
-            <div className="bg-company-gray p-6 rounded-lg text-center">
-              <h4 className="text-3xl font-bold text-company-blue">50+</h4>
-              <p className="text-gray-700">Especialistas</p>
-            </div>
-            <div className="bg-company-gray p-6 rounded-lg text-center">
-              <h4 className="text-3xl font-bold text-company-blue">98%</h4>
-              <p className="text-gray-700">Clientes satisfeitos</p>
-            </div>
-          </div> */}
         <img
-          src="/Logo-03-Transparente.png"
+          src="/Logo-Sobre.png"
           alt="Sobre a Smart Assembly"
           className="w-full h-auto rounded-lg transform scale-x-[-1]"
         />

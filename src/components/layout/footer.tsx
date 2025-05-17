@@ -10,9 +10,9 @@ export function Footer() {
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <img src="/Emvetor-03.svg" alt="Logo" className="h-40 w-auto" />
+            <img src="/Logo-03-Branco.png" alt="Logo" className="h-20 w-auto mb-4" />
             <p className="text-gray-300 mb-4">
-              Soluções personalizadas para transformar digitalmente o seu negócio.
+              Soluções personalizadas em automação industrial para tornar sua produção mais eficiente. 
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-white hover:text-gray-300">
@@ -66,7 +66,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="mr-3 h-5 w-5 text-company-lightBlue flex-shrink-0" />
-                <span>Rua Exemplo, 123, Centro<br />Rio de Janeiro, RJ</span>
+                <span>Indaiatuba, SP<br /></span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-3 h-5 w-5 text-company-lightBlue flex-shrink-0" />

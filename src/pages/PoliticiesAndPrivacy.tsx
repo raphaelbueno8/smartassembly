@@ -11,9 +11,7 @@ const PoliciesAndPrivacy = () => {
                 <Section background="white" className="py-12">
                     <div className="max-w-4xl mx-auto">
                         <h1 className="text-3xl md:text-4xl font-bold mb-8 text-company-darkBlue">Políticas e Privacidade</h1>
-
                         <div className="space-y-8">
-                            {/* Política de Privacidade */}
                             <div className="space-y-4">
                                 <h2 className="text-2xl font-semibold text-company-blue">Política de Privacidade</h2>
                                 <p className="text-gray-700">

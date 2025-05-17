@@ -35,7 +35,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           <a href="#hero" className="flex items-center">
             <img
-              src={scrolled ? "/Emvetor-12.svg" : "/Emvetor-08.svg"}
+              src={scrolled ? "/Logo-Header-01.png" : "/Logo-Header-02.png"}
               alt="Logo"
               className="h-14 md:h-14 w-auto transition-all duration-300"
             />

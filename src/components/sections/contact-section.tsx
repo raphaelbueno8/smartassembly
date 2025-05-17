@@ -3,14 +3,15 @@ import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import InputMask from "react-input-mask";
+import { IMaskInput } from 'react-imask';
 import emailjs from "@emailjs/browser";
+import { formatPhone } from "@/lib/utils";
 
 const serviceId = "service_w6llmdz";
 const templateId = "template_g7r8xj6";
@@ -33,6 +34,7 @@ export function ContactSection() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(FormValuesSchema),
@@ -51,7 +53,7 @@ export function ContactSection() {
     }
 
     await emailjs.send(serviceId, templateId, params, publicKey)
-      .then((response) => {
+      .then(() => {
         toast({
           title: "Mensagem enviada",
           description: "Agradecemos pelo seu contato. Retornaremos em breve!",
@@ -64,15 +66,13 @@ export function ContactSection() {
           subject: "",
           message: "",
         });
-        console.log(response.status, response.text);
-      }, (error) => {
+      }, () => {
         toast({
           title: "Erro ao enviar mensagem",
           description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde.",
           variant: "destructive",
           duration: 5000
         });
-        console.log(error.text);
       });
 
     setIsSubmitting(false);
@@ -93,7 +93,7 @@ export function ContactSection() {
               <MapPin className="w-6 h-6 mr-4 text-white flex-shrink-0" />
               <div>
                 <h4 className="font-bold mb-1">Endereço</h4>
-                <p className="text-white/80">Rua Exemplo, 123, Centro<br />Rio de Janeiro, RJ</p>
+                <p className="text-white/80">Indaiatuba, SP<br /></p>
               </div>
             </div>
 
@@ -148,6 +148,7 @@ export function ContactSection() {
                   maxLength={100}
                   {...register("name")}
                   className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
+                  autoComplete="name"
                 />
                 {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
               </div>
@@ -159,24 +160,24 @@ export function ContactSection() {
                   maxLength={100}
                   {...register("email")}
                   className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
+                  autoComplete="email"
                 />
                 {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
               </div>
 
               <div>
-                <InputMask
-                  mask="(99) 99999-9999"
+                <Input
+                  type="phone"
+                  placeholder="(00) 00000-0000"
+                  maxLength={15}
                   {...register("phone")}
-                >
-                  {(inputProps: any) => (
-                    <Input
-                      {...inputProps}
-                      type="tel"
-                      placeholder="(99) 99999-9999"
-                      className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
-                    />
-                  )}
-                </InputMask>
+                  className={`${errors.name ? "border-red-500" : ""} text-company-darkBlue`}
+                  autoComplete="phone"
+                  onChange={(e => {
+                    const formatted = formatPhone(e.target.value);
+                    setValue("phone", formatted, { shouldValidate: true });
+                  })}
+                />
                 {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>}
               </div>
 
