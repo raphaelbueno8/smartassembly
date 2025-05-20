@@ -45,14 +45,15 @@ const ServiceCard = ({
   return (
     <div
       ref={cardRef}
-      className={`bg-white rounded-xl p-6 shadow-sm border-t-4 ${borderColor} transform transition-all duration-500 opacity-0 translate-y-4 hover:shadow-xl hover:-translate-y-2`}
+      className={`flex flex-col justify-between bg-white rounded-xl p-6 shadow-sm border-t-4 ${borderColor} transform transition-all duration-500 opacity-0 translate-y-4 hover:shadow-xl hover:-translate-y-2`}
     >
-      <div className={`w-12 h-12 flex items-center justify-center ${bgColor} rounded-lg mb-4`}>
-        <div className={iconColor}>{icon}</div>
+      <div className="flex flex-col flex-grow">
+        <div className={`w-12 h-12 flex items-center justify-center ${bgColor} rounded-lg mb-4`}>
+          <div className={iconColor}>{icon}</div>
+        </div>
+        <h3 className="text-xl font-semibold mb-3 text-gray-900 min-h-[56px]">{title}</h3>
+        <p className="text-gray-800 mb-4 min-h-[120px]">{description}</p>
       </div>
-      <h3 className="text-xl font-semibold mb-3 text-gray-900">{title}</h3>
-      <p className="text-gray-800 mb-4">{description}</p>
-
       {imageSrc && (
         <div className="mt-4 overflow-hidden rounded-lg">
           <AspectRatio ratio={16 / 9}>
@@ -69,7 +70,7 @@ export const FeaturesSection = () => {
     {
       icon: <Plug />,
       title: "Montagem de painés elétricos",
-      description: "Montamos painéis elétricos sob medida, garantindo sistemas seguros, eficientes e otimizados para atender às necessidades da sua empresa",
+      description: "Montagem de painéis elétricos sob medida desde o desenvolvimento de projeto elétrico, montagem, integração à máquina ou processo e comissionamento, respeitando as normas vigentes e garantindo sistemas seguros, eficientes e otimizados para atender as necessidades da sua empresa",
       delay: 0,
       bgColor: "bg-company-lightBlue",
       iconColor: "text-company-blue",
@@ -78,8 +79,8 @@ export const FeaturesSection = () => {
     },
     {
       icon: <Code />,
-      title: "Desenvolvimento de softwares para PLC",
-      description: "Desenvolvimento de soluções customizadas para automação industrial, para otimizar processos e melhorar a eficiência operacional",
+      title: "Desenvolvimento de softwares",
+      description: "Softwares para PLCs, IHMs, supervisórios, redes industriais, motion control, desenvolvidos de maneira customizada para automação industrial focando sempre na otimização de processos e eficiência operacional",
       delay: 200,
       bgColor: "bg-company-lightBlue",
       iconColor: "text-company-blue",
@@ -88,28 +89,28 @@ export const FeaturesSection = () => {
     },
     {
       icon: <Bolt />,
-      title: "Motion Control",
-      description: "Oferecemos soluções avançadas em controle de movimento, utilizando servo motores para garantir precisão e eficiência em processos industriais automatizados.",
+      title: "Robôs industriais",
+      description: "Configuração, parametrização, programação e teching de robôs industriais para executar tarefas automatizadas com precisão, aumentando a eficiência e segurança na produção.",
       delay: 400,
-      bgColor: "bg-company-lightBlue",
-      iconColor: "text-company-blue",
-      borderColor: "border-company-blue",
-      imageSrc: "/Motion-Control.jpg"
-    },
-    {
-      icon: <Bot />,
-      title: "Programação de robôs industriais",
-      description: "Configuração e ajuste de robôs para executar tarefas automatizadas com precisão, aumentando a eficiência e segurança na produção.",
-      delay: 600,
       bgColor: "bg-company-lightBlue",
       iconColor: "text-company-blue",
       borderColor: "border-company-blue",
       imageSrc: "/Robos-Industriais.jpg"
     },
     {
+      icon: <Bot />,
+      title: "Manutenção industrial",
+      description: "Serviços de manutenção preventiva, corretiva e preditiva conforme demanda do cliente, serviços especializados de manutenção como: lubrificação de robôs, implementação de self maintenance (sistemas de limpeza e lubrificação automatizada, automação de checagens periódicas).",
+      delay: 600,
+      bgColor: "bg-company-lightBlue",
+      iconColor: "text-company-blue",
+      borderColor: "border-company-blue",
+      imageSrc: "/Motion-Control.jpg"
+    },
+    {
       icon: <Cog />,
-      title: "Consultoria em manutenção industrial",
-      description: "Análise e orientação especializada para melhorar a manutenção de máquinas, reduzindo falhas e otimizando custos operacionais.",
+      title: "Consultoria",
+      description: "Análise e orientação especializada para melhorar a manutenção e gerenciamento de máquinas e recursos, aumentando a disponibilidade dos equipamentos e reduzindo custos operacionais",
       delay: 800,
       bgColor: "bg-company-lightBlue",
       iconColor: "text-company-blue",

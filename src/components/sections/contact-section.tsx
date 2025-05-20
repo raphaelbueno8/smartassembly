@@ -108,7 +108,7 @@ export function ContactSection() {
               <Mail className="w-6 h-6 mr-4 text-white flex-shrink-0" />
               <div>
                 <h4 className="font-bold mb-1">E-mail</h4>
-                <p className="text-white/80">contato@smartassembly.com</p>
+                <p className="text-white/80">contato@smartassembly.com.br</p>
               </div>
             </div>
           </div>
